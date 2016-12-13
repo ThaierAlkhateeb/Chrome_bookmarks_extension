@@ -1,0 +1,39 @@
+{
+  "name": "Bookmarks Manager",
+  "version": "1.0",
+  "manifest_version": 2,
+  "background": {
+ "scripts": ["js/background.js"]
+   },
+
+  "icons": { 
+    "128": "icon.png"
+    },
+  "description" : "A browser action with a popup dump of all bookmarks, including search, add, edit and delete.",
+
+  "author":"Thaier Alkhateeb",
+
+
+ 
+  "browser_action": {
+      "default_title": "My Bookmarks",
+      "default_icon": "icon.png",
+      "default_popup": "popup.html"
+  },
+ "content_scripts": [
+
+    {
+      "matches": ["http://www.dar-alhekma.com/oauth2callback*"],
+      "js": ["oauth2/oauth2_inject.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+   "bookmarks",
+    "https://accounts.google.com/o/oauth2/token"
+  ],
+  "web_accessible_resources" : [
+    "oauth2/oauth2.html"
+  ],
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self' "
+}
